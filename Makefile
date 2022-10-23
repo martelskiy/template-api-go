@@ -31,4 +31,4 @@ vet:
 
 .PHONY: swag-init
 swag-init:
-	swag init -g ${EXEC_DIRECTORY}/main.go -o ./docs
+	swag init -g ${EXEC_DIRECTORY}/main.go -o ./api/docs

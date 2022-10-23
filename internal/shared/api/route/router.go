@@ -1,7 +1,7 @@
 package route
 
 import (
-	_ "github.com/api-template-go/docs"
+	_ "github.com/api-template-go/api/docs"
 	"github.com/gorilla/mux"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
