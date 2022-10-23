@@ -1,0 +1,18 @@
+info:
+  contact: {}
+  title: API Swagger
+  version: "1.0"
+paths:
+  /status:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Application healthcheck
+      tags:
+      - status
+swagger: "2.0"
