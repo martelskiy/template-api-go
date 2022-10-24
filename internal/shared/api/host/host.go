@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/api-template-go/internal/shared/api/route"
-	"github.com/api-template-go/internal/shared/logger"
+	"github.com/martelskiy/template-api-go/internal/shared/api/route"
+	"github.com/martelskiy/template-api-go/internal/shared/logger"
 	"go.uber.org/zap"
 )
 

@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 
-	"github.com/api-template-go/config"
-	"github.com/api-template-go/internal/healthcheck"
-	"github.com/api-template-go/internal/shared/api/host"
-	"github.com/api-template-go/internal/shared/api/route"
-	"github.com/api-template-go/internal/shared/lifecycle"
-	"github.com/api-template-go/internal/shared/logger"
-	"github.com/api-template-go/internal/shared/parser/json"
+	"github.com/martelskiy/template-api-go/config"
+	"github.com/martelskiy/template-api-go/internal/healthcheck"
+	"github.com/martelskiy/template-api-go/internal/shared/api/host"
+	"github.com/martelskiy/template-api-go/internal/shared/api/route"
+	"github.com/martelskiy/template-api-go/internal/shared/lifecycle"
+	"github.com/martelskiy/template-api-go/internal/shared/logger"
+	"github.com/martelskiy/template-api-go/internal/shared/parser/json"
 )
 
 const appConfigPath = "config/appconfig.json"

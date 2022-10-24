@@ -5,7 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/api-template-go/internal/shared/logger"
+	"github.com/martelskiy/template-api-go/internal/shared/logger"
 )
 
 var log = logger.Get()

@@ -1,4 +1,4 @@
-module github.com/api-template-go
+module github.com/martelskiy/template-api-go
 
 go 1.19
 
