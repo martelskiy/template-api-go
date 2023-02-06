@@ -11,14 +11,19 @@ import (
 
 const hostName = "127.0.0.1"
 
-type host struct {
-	router route.IRouter
+type Host interface {
+	RunAsync() error
+	Terminate(ctx context.Context) error
+}
+
+type WebHost struct {
+	router route.Router
 	server http.Server
 	logger *zap.SugaredLogger
 }
 
-func NewHost(port string, router route.IRouter) IHost {
-	return &host{
+func New(port string, router route.Router) *WebHost {
+	return &WebHost{
 		router: router,
 		logger: logger.Get(),
 		server: http.Server{
@@ -28,7 +33,7 @@ func NewHost(port string, router route.IRouter) IHost {
 	}
 }
 
-func (h *host) RunAsync() error {
+func (h *WebHost) RunAsync() error {
 	go func() {
 		if err := h.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			h.logger.With("error", err.Error()).Panic("error running web host")
@@ -37,6 +42,6 @@ func (h *host) RunAsync() error {
 	return nil
 }
 
-func (h *host) Terminate(ctx context.Context) error {
+func (h *WebHost) Terminate(ctx context.Context) error {
 	return h.server.Shutdown(ctx)
 }

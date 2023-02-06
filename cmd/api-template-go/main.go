@@ -18,21 +18,20 @@ const appConfigPath = "config/appconfig.json"
 // @version         1.0
 func main() {
 	context := context.Background()
-	log := logger.Initialize()
-	log.Info("logger initialized")
+	log := logger.Get()
+	log.Info("initializing configuration")
 
 	parser := json.NewParser[config.AppConfig]()
 	configuration, err := parser.Parse(appConfigPath)
 	if err != nil {
 		lifecycle.StopApplication("error initialization application configurations")
 	}
-
 	router := route.NewRouter()
 	router.
 		WithAPIDocumentation().
 		WithRoute(route.NewRoute("/status", healthcheck.GetStatus))
 
-	host := host.NewHost(configuration.Api.Port, router)
+	host := host.New(configuration.Api.Port, router)
 	err = host.RunAsync()
 	if err != nil {
 		lifecycle.StopApplication("error running web host")

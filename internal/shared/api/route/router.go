@@ -6,27 +6,33 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
-type router struct {
+type Router interface {
+	WithAPIDocumentation() Router
+	WithRoute(route Route) Router
+	GetRouter() *mux.Router
+}
+
+type WebRouter struct {
 	muxRouter *mux.Router
 }
 
-func NewRouter() IRouter {
+func NewRouter() *WebRouter {
 	muxRouter := mux.NewRouter().StrictSlash(true)
-	return &router{
+	return &WebRouter{
 		muxRouter: muxRouter,
 	}
 }
 
-func (r *router) WithAPIDocumentation() IRouter {
+func (r *WebRouter) WithAPIDocumentation() Router {
 	r.muxRouter.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 	return r
 }
 
-func (r *router) WithRoute(route route) IRouter {
+func (r *WebRouter) WithRoute(route Route) Router {
 	r.muxRouter.HandleFunc(route.name, route.handler)
 	return r
 }
 
-func (r *router) GetRouter() *mux.Router {
+func (r *WebRouter) GetRouter() *mux.Router {
 	return r.muxRouter
 }

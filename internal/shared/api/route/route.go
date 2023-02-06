@@ -2,22 +2,22 @@ package route
 
 import "net/http"
 
-type route struct {
+type Route struct {
 	name    string
 	handler func(responseWriter http.ResponseWriter, request *http.Request)
 }
 
-func NewRoute(name string, handler func(responseWriter http.ResponseWriter, request *http.Request)) route {
-	return route{
+func NewRoute(name string, handler func(responseWriter http.ResponseWriter, request *http.Request)) Route {
+	return Route{
 		name:    name,
 		handler: handler,
 	}
 }
 
-func (r *route) GetName() string {
+func (r *Route) Name() string {
 	return r.name
 }
 
-func (r *route) GetHandler() func(responseWriter http.ResponseWriter, request *http.Request) {
+func (r *Route) Handler() func(responseWriter http.ResponseWriter, request *http.Request) {
 	return r.handler
 }
