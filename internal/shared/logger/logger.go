@@ -18,6 +18,6 @@ func Get() *zap.SugaredLogger {
 
 func Dispose() {
 	if sugaredLogger != nil {
-		defer sugaredLogger.Sync()
+		_ = sugaredLogger.Sync()
 	}
 }
