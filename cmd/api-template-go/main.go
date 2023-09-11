@@ -40,9 +40,12 @@ func main() {
 	log.Infof("web host is running at port: '%s'", configuration.Api.Port)
 
 	lifecycle.ListenForApplicationShutDown(func() {
+		defer logger.Dispose()
 		log.Info("terminating the web host")
-		host.Terminate(context)
+		if err := host.Terminate(context); err != nil {
+			log.Error("error terminating the host: '%v'", err)
+		}
+
 		log.Info("disposing logger")
-		logger.Dispose()
 	}, make(chan os.Signal, 1))
 }
