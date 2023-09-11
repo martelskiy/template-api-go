@@ -13,5 +13,5 @@ import (
 func GetStatus(responseWriter http.ResponseWriter, request *http.Request) {
 	responseWriter.WriteHeader(http.StatusOK)
 	statusResponse := "healthy"
-	responseWriter.Write([]byte(statusResponse))
+	_, _ = responseWriter.Write([]byte(statusResponse))
 }
