@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"os"
 
 	"github.com/martelskiy/template-api-go/config"
 	"github.com/martelskiy/template-api-go/internal/healthcheck"
@@ -43,5 +44,5 @@ func main() {
 		host.Terminate(context)
 		log.Info("disposing logger")
 		logger.Dispose()
-	})
+	}, make(chan os.Signal, 1))
 }

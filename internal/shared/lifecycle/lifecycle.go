@@ -10,8 +10,7 @@ import (
 
 var log = logger.Get()
 
-func ListenForApplicationShutDown(shutdownFunc func()) {
-	signalChannel := make(chan os.Signal, 1)
+func ListenForApplicationShutDown(shutdownFunc func(), signalChannel chan os.Signal) {
 	signal.Notify(signalChannel, os.Interrupt, syscall.SIGTERM)
 
 	sig := <-signalChannel
