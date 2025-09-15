@@ -6,10 +6,10 @@ import (
 	"os"
 )
 
-type Parser[T interface{}] struct {
+type Parser[T any] struct {
 }
 
-func NewParser[T interface{}]() *Parser[T] {
+func NewParser[T any]() *Parser[T] {
 	return &Parser[T]{}
 }
 
@@ -18,7 +18,10 @@ func (p *Parser[T]) Parse(filePath string) (*T, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+
+	defer func() {
+		_ = file.Close()
+	}()
 
 	bytes, _ := io.ReadAll(file)
 
