@@ -16,7 +16,7 @@ func Test_GivenHTTPCall_WhenGetStatus_ThenReturnsOKStatusCode(t *testing.T) {
 	GetStatus(w, req)
 
 	res := w.Result()
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 
 	assert.NotNil(t, res)
 	assert.Equal(t, http.StatusOK, res.StatusCode)
@@ -29,7 +29,7 @@ func Test_GivenHTTPCall_WhenGetStatus_ThenReturnsHealthyResponseBody(t *testing.
 	GetStatus(w, req)
 
 	res := w.Result()
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 	data, err := io.ReadAll(res.Body)
 	assert.NoError(t, err)
 	assert.Equal(t, "healthy", string(data))
