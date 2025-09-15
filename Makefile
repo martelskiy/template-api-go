@@ -6,7 +6,7 @@ build:
 	go build -o ${BINARY_PATH} ${EXEC_DIRECTORY}/main.go
 
 .PHONY: run
-run:
+run: build
 	./${BINARY_PATH}
 
 .PHONY: clean

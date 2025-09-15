@@ -17,14 +17,12 @@ type Host interface {
 }
 
 type WebHost struct {
-	router route.Router
 	server http.Server
 	logger *zap.SugaredLogger
 }
 
 func New(port string, router route.Router) *WebHost {
 	return &WebHost{
-		router: router,
 		logger: logger.Get(),
 		server: http.Server{
 			Addr:    hostName + ":" + port,
