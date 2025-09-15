@@ -29,7 +29,7 @@ func (r *WebRouter) WithAPIDocumentation() Router {
 }
 
 func (r *WebRouter) WithRoute(route Route) Router {
-	r.muxRouter.HandleFunc(route.name, route.handler)
+	r.muxRouter.HandleFunc(route.name, route.handler).Methods(string(route.Method()))
 	return r
 }
 

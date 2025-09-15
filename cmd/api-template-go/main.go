@@ -27,10 +27,11 @@ func main() {
 	if err != nil {
 		lifecycle.StopApplication("error initialization application configurations")
 	}
+
 	router := route.NewRouter()
 	router.
 		WithAPIDocumentation().
-		WithRoute(route.NewRoute("/status", healthcheck.GetStatus))
+		WithRoute(route.NewRoute("/status", route.MethodGET, healthcheck.GetStatus))
 
 	host := host.New(configuration.Api.Port, router)
 	host.Serve()
