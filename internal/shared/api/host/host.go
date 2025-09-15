@@ -28,18 +28,17 @@ func New(port string, router route.Router) *WebHost {
 		logger: logger.Get(),
 		server: http.Server{
 			Addr:    hostName + ":" + port,
-			Handler: router.GetRouter(),
+			Handler: router.Router(),
 		},
 	}
 }
 
-func (h *WebHost) RunAsync() error {
+func (h *WebHost) Serve() {
 	go func() {
 		if err := h.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			h.logger.With("error", err.Error()).Panic("error running web host")
 		}
 	}()
-	return nil
 }
 
 func (h *WebHost) Terminate(ctx context.Context) error {
