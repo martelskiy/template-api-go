@@ -11,7 +11,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: ""
+          description: OK
       summary: Application healthcheck
       tags:
       - status
