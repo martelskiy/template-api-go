@@ -33,14 +33,17 @@ func main() {
 		WithRoute(route.NewRoute("/status", healthcheck.GetStatus))
 
 	host := host.New(configuration.Api.Port, router)
-	err = host.RunAsync()
+	host.Serve()
+
 	if err != nil {
 		lifecycle.StopApplication("error running web host")
 	}
+
 	log.Infof("web host is running at port: '%s'", configuration.Api.Port)
 
 	lifecycle.ListenForApplicationShutDown(func() {
 		defer logger.Dispose()
+
 		log.Info("terminating the web host")
 		if err := host.Terminate(context); err != nil {
 			log.Error("error terminating the host: '%v'", err)

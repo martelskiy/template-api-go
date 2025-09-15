@@ -9,7 +9,7 @@ import (
 type Router interface {
 	WithAPIDocumentation() Router
 	WithRoute(route Route) Router
-	GetRouter() *mux.Router
+	Router() *mux.Router
 }
 
 type WebRouter struct {
@@ -33,6 +33,6 @@ func (r *WebRouter) WithRoute(route Route) Router {
 	return r
 }
 
-func (r *WebRouter) GetRouter() *mux.Router {
+func (r *WebRouter) Router() *mux.Router {
 	return r.muxRouter
 }

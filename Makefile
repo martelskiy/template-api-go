@@ -29,6 +29,10 @@ dep:
 vet:
 	go vet ./...
 
+.PHONY: lint
+lint:
+	golangci-lint run
+
 .PHONY: swag-init
 swag-init:
 	swag init -g ${EXEC_DIRECTORY}/main.go -o ./api/docs
